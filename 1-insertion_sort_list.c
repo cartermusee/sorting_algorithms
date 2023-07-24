@@ -2,8 +2,8 @@
 
 /**
  * swap - swaps 2 node
- * @a: address of first node
- * @b: address of second node
+ * @n: address of first node
+ * @k: address of second node
  */
 void swap(listint_t *n, listint_t *k)
 {
