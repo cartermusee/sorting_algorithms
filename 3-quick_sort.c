@@ -1,6 +1,24 @@
 #include "sort.h"
 
 /**
+ * swap-swap elemnts
+ * @array:array to swap el
+ * @size:size of array
+ * @i:1 elemnt
+ * @j:second
+ */
+void swap(int *array, size_t size, int *i, int *j)
+{
+	if (*i != *j)
+	{
+		*i = *i + *j;
+		*j = *i - *j;
+		*i = *i - *j;
+		print_array((const int *)array, size);
+	}
+}
+
+/**
  * Lomuto_partition- function to partion array
  * @array:array to partion
  * @size:size of array
@@ -10,28 +28,15 @@
  */
 size_t Lomuto_partition(int *array, size_t size, ssize_t lb, ssize_t up)
 {
-	int pivot = array[up];
-	ssize_t start = lb - 1;
-	ssize_t j;
-	int temp;
+	int k, j, pivot = array[up];
 
-	for (j = lb; j <= up - 1; j++)
-	{
-		if (array[j] <= pivot)
-		{
-			start++;
-			temp = array[start];
-			array[start] = array[j];
-			array[j] = temp;
-		}
-	}
-	temp = array[start + 1];
-	array[start + 1] = array[up];
-	array[up] = temp;
-	print_array(array, size);
-	return (start + 1);
+	for (k = j = lb; j < up; j++)
+		if (array[j] < pivot)
+			swap(array, size, &array[j], &array[k++]);
+	swap(array, size, &array[k], &array[up]);
+
+	return (k);
 }
-
 /**
  * quicksort - function to sort
  * @array:the array to sort
