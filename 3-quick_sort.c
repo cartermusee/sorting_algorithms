@@ -10,14 +10,14 @@
  */
 size_t Lomuto_partition(int *array, size_t size, ssize_t lb, ssize_t up)
 {
-	int pivot = array[lb];
+	int pivot = array[lb + (up - lb) / 2];
 	ssize_t start = lb;
 	ssize_t end = up;
-	int temp, tmp;
+	int temp;
 
 	while (start < end)
 	{
-		while (array[start] <= pivot)
+		while (array[start] < pivot)
 		{
 			start++;
 		}
@@ -25,18 +25,17 @@ size_t Lomuto_partition(int *array, size_t size, ssize_t lb, ssize_t up)
 		{
 			end--;
 		}
-		if (start < end)
+		if (start <= end)
 		{
 			temp = array[start];
 			array[start] = array[end];
 			array[end] = temp;
+			start++;
+			end--;
 		}
 	}
-	tmp = array[lb];
-	array[lb] = array[end];
-	array[end] = tmp;
 	print_array(array, size);
-	return (end);
+	return (start - 1);
 }
 
 /**
