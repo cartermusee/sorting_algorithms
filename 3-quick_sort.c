@@ -30,6 +30,7 @@ size_t Lomuto_partition(int *array, size_t size, ssize_t lb, ssize_t up)
 			temp = array[start];
 			array[start] = array[end];
 			array[end] = temp;
+			print_array(array, size);
 		}
 	}
 	tmp = array[lb];
