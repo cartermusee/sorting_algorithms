@@ -10,32 +10,26 @@
  */
 size_t Lomuto_partition(int *array, size_t size, ssize_t lb, ssize_t up)
 {
-	int pivot = array[lb + (up - lb) / 2];
-	ssize_t start = lb;
-	ssize_t end = up;
+	int pivot = array[up];
+	ssize_t start = lb - 1;
+	ssize_t j;
 	int temp;
 
-	while (start <= end)
+	for (j = lb; j <= up; j++)
 	{
-		while (array[start] < pivot)
+		if (array[j] <= pivot)
 		{
 			start++;
-		}
-		while (array[end] > pivot)
-		{
-			end--;
-		}
-		if (start <= end)
-		{
 			temp = array[start];
-			array[start] = array[end];
-			array[end] = temp;
-			start++;
-			end--;
+			array[start] = array[j];
+			array[j] = temp;
 		}
 	}
+	temp = array[start + 1];
+	array[start + 1] = array[up];
+	array[up] = temp;
 	print_array(array, size);
-	return (start - 1);
+	return (start + 1);
 }
 
 /**
@@ -52,7 +46,7 @@ void quicksort(int *array, size_t size, ssize_t lb, ssize_t up)
 	if (lb < up)
 	{
 		loc = Lomuto_partition(array, size, lb, up);
-		quicksort(array, size, lb, loc);
+		quicksort(array, size, lb, loc - 1);
 		quicksort(array, size, loc + 1, up);
 	}
 }
