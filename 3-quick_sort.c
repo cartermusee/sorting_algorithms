@@ -1,11 +1,12 @@
 #include "sort.h"
 
 /**
- * lomuto_partition- function to partion array
+ * Lomuto_partition- function to partion array
  * @array:array to partion
  * @size:size of array
  * @lb:lower bound of array
  * @up:upper bound of arrray
+ * Return:upper bound
  */
 size_t Lomuto_partition(int *array, size_t size, ssize_t lb, ssize_t up)
 {
@@ -16,7 +17,7 @@ size_t Lomuto_partition(int *array, size_t size, ssize_t lb, ssize_t up)
 
 	while (start < end)
 	{
-		while(array[start] <= pivot)
+		while (array[start] <= pivot)
 		{
 			start++;
 		}
@@ -69,4 +70,4 @@ void quick_sort(int *array, size_t size)
 		return;
 	}
 	quicksort(array, size, 0, size - 1);
-}	
+}
